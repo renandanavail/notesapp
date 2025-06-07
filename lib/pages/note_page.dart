@@ -68,6 +68,35 @@ class _NotePageState extends State<NotePage> {
         onPressed: addNewNote,
         child: const Icon(Icons.add),
       ),
+
+      // Body -> Stream Builder
+      body: StreamBuilder(
+        // listen to this stream
+        stream: notesDatabase.stream,
+
+        // to build our UI..
+        builder: (context, snapshot) {
+          // loading..
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          // loaded!
+          final notes = snapshot.data!;
+
+          // list of notes UI
+          return ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (context, index) {
+              // get each note
+              final note = notes[index];
+
+              // list tile UI
+              return ListTile(title: Text(note.content));
+            },
+          );
+        },
+      ),
     );
   }
 }
