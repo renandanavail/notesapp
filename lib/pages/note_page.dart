@@ -94,9 +94,22 @@ class _NotePageState extends State<NotePage> {
               // list tile UI
               return ListTile(
                 title: Text(note.content),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.delete),
+                trailing: SizedBox(
+                  width: 100,
+                  child: Row(
+                    children: [
+                      // update button
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.edit),
+                      ),
+                      // delete button
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
