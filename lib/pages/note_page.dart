@@ -90,6 +90,37 @@ class _NotePageState extends State<NotePage> {
   }
 
   // user wants to delete note
+  void deleteNote(Note note) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Delete Note?"),
+            actions: [
+              // cancel button
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  noteController.clear();
+                },
+                child: const Text("Cancel"),
+              ),
+
+              // save button
+              TextButton(
+                onPressed: () {
+                  // save in db
+                  notesDatabase.deleteNote(note);
+
+                  Navigator.pop(context);
+                  noteController.clear();
+                },
+                child: const Text("Delete"),
+              ),
+            ],
+          ),
+    );
+  }
 
   // BUILD UI
   @override
@@ -140,7 +171,7 @@ class _NotePageState extends State<NotePage> {
                       ),
                       // delete button
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () => deleteNote(note),
                         icon: const Icon(Icons.delete),
                       ),
                     ],
