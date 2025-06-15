@@ -53,6 +53,41 @@ class _NotePageState extends State<NotePage> {
   }
 
   // user wants to update note
+  void updateNote(Note note) {
+    // pre-fill text controller with existing note
+    noteController.text = note.content;
+
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Update Note"),
+            content: TextField(controller: noteController),
+            actions: [
+              // cancel button
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  noteController.clear();
+                },
+                child: const Text("Cancel"),
+              ),
+
+              // save button
+              TextButton(
+                onPressed: () {
+                  // save in db
+                  notesDatabase.updateNote(note, noteController.text);
+
+                  Navigator.pop(context);
+                  noteController.clear();
+                },
+                child: const Text("Save"),
+              ),
+            ],
+          ),
+    );
+  }
 
   // user wants to delete note
 
@@ -100,7 +135,7 @@ class _NotePageState extends State<NotePage> {
                     children: [
                       // update button
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () => updateNote(note),
                         icon: const Icon(Icons.edit),
                       ),
                       // delete button
