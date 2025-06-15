@@ -127,7 +127,17 @@ class _NotePageState extends State<NotePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // App Bar
-      appBar: AppBar(title: const Text("Notes")),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "NoteNest",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            letterSpacing: 1.2,
+          ),
+        ),
+      ),
 
       // Button
       floatingActionButton: FloatingActionButton(
