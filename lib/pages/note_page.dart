@@ -168,23 +168,32 @@ class _NotePageState extends State<NotePage> {
               final note = notes[index];
 
               // list tile UI
-              return ListTile(
-                title: Text(note.content),
-                trailing: SizedBox(
-                  width: 100,
-                  child: Row(
-                    children: [
-                      // update button
-                      IconButton(
-                        onPressed: () => updateNote(note),
-                        icon: const Icon(Icons.edit),
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 6.0,
+                ),
+                child: Card(
+                  elevation: 2,
+                  child: ListTile(
+                    title: Text(note.content),
+                    trailing: SizedBox(
+                      width: 100,
+                      child: Row(
+                        children: [
+                          // update button
+                          IconButton(
+                            onPressed: () => updateNote(note),
+                            icon: const Icon(Icons.edit),
+                          ),
+                          // delete button
+                          IconButton(
+                            onPressed: () => deleteNote(note),
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ],
                       ),
-                      // delete button
-                      IconButton(
-                        onPressed: () => deleteNote(note),
-                        icon: const Icon(Icons.delete),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               );
